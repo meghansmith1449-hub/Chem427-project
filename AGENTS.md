@@ -28,6 +28,6 @@ When the student asks for a plan, give it in words and write no code until the s
 
 The student replaces the three lines below and adds a line each time they correct the assistant on the same point twice.
 
-- Question: (one sentence)
-- Data: (the file in `data/`, what one row is, and its source URL and access date)
-- Measured variable: (its column name and unit)
+- Question: Does AFM height read silica nanoparticles smaller than SEM and SAXS do, while reading gold nanoparticles correctly, by more than the combined uncertainty?
+- Data: nPSize image and annotation records, Zenodo (2021–2022): https://doi.org/10.5281/zenodo.5578927, https://doi.org/10.5281/zenodo.5578878, https://doi.org/10.5281/zenodo.5577401, https://doi.org/10.5281/zenodo.5886834, https://doi.org/10.5281/zenodo.7016466. Accessed November 8, 2026.
+- Measured variable: 11. Nanoparticle size by three techniques
