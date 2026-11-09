@@ -1,8 +1,8 @@
 # 001: Write `.gitignore`
 
-- **Status:** active
-- **Created:** YYYY-MM-DD
-- **Updated:** YYYY-MM-DD
+- **Status:** done
+- **Created:** 2026-11-08
+- **Updated:** 2026-11-08
 - **Due:** 2026-11-01, before task 002
 
 ## Goal
@@ -65,5 +65,7 @@ If your data cannot be stored on GitHub, because they are too large or their lic
 `.gitignore` is pushed, and after `uv sync` in task 002, `git status` does not list `.venv/`. Close this task then.
 
 ## Progress log
+2026-11-08: Created .gitignore in the project's top folder, committed and pushed it ("Add .gitignore"). After uv sync, git status listed .python-version, pyproject.toml and uv.lock but not .venv/.
 
 ## Outcome
+.gitignore is pushed and keeps .venv/ out of git.

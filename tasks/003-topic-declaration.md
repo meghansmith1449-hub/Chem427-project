@@ -1,8 +1,8 @@
 # 003: Topic declaration
 
-- **Status:** active
-- **Created:** YYYY-MM-DD
-- **Updated:** YYYY-MM-DD
+- **Status:** done
+- **Created:** 2026-11-08
+- **Updated:** 2026-11-08
 - **Due:** 2026-11-08, 11:59 pm
 
 ## Goal
