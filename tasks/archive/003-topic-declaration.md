@@ -58,4 +58,9 @@ The Canvas entry is in. Close this task after it is, with the URL you submitted 
 
 ## Progress log
 
+## 2026-11-08
+Submitted canvas entry.
+
 ## Outcome
+https://github.com/meghansmith1449-hub/Chem427-project/commit/02b9fa33d54ba6bd77a0131da1bc218dfb5fb4c8 
+
