@@ -1,6 +1,6 @@
 # 002: Copy the course environment
 
-- **Status:** archive
+- **Status:** done
 - **Created:** 2026-11-08
 - **Updated:** 2026-11-08
 - **Due:** 2026-11-01, after task 001
