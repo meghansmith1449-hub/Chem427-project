@@ -40,6 +40,8 @@ Entries are added when the student says to log a decision. Status is **open** un
   - **3. Always report AFM vs TEM as a sensitivity check.** Same structure as D2, but it extends D1 and adds comparisons.
 - *Decision:* **Option 3.** AFM − TEM is reported next to AFM − SEM for each material, using the same criterion: |Δ| > K_COVERAGE · u_combined and the bootstrap 95% CI of the difference. The conclusion is called robust only if both comparisons point the same way. This extends D1: TEM is no longer context only, but a secondary reference. SEM (BAM + LNE) stays the primary reference. TSEM stays context only. The AFM − TEM check uses **minimum Feret only** (not maximum Feret), to keep the number of comparisons down.
 
+**Amendment (2026-11-21), scope of the draft:** TSEM is removed from the notebook, and the AFM − TEM check (follow-up option 3) is dropped from the draft. TEM stays in the descriptive-statistics table as context. Either can return for the final submission. Context: the course's final-project page asks for one named comparison or check, and puts a finished notebook at about 15 to 25 cells.
+
 **Reasoning:** see `judgment-log.md` (student's own entry).
 
 ---
@@ -80,6 +82,8 @@ Entries are added when the student says to log a decision. Status is **open** un
 - **Secondary:** maximum Feret, as a sensitivity check.
 - **ECD:** not included. It is bounded above by maximum Feret and, for near-round particles, lies between the two Feret values. Revisit only if the histograms show clearly non-spherical particles, or in task 006.
 - **If minimum and maximum Feret lead to different conclusions:** report the result as dependent on the measure. Do not add ECD afterwards to decide between them.
+
+**Amendment (2026-11-21), scope of the draft:** the maximum Feret sensitivity check is dropped from the draft. Minimum Feret stays the only SEM measure. It can return for the final submission.
 
 **Reasoning:** see `judgment-log.md` (student's own entry).
 
@@ -141,7 +145,7 @@ Entries are added when the student says to log a decision. Status is **open** un
 - **D. A pixel-unit flag ((maximum − minimum Feret) / pixel size).** Scales with resolution. A gap exists for LNE only, and the pixel unit has no meaning for TEM (0.26 nm/px).
 - **E. No screen, statement in markdown only.** The milestone wants a count from code.
 
-**Decision:** Option B. `ASPECT_RATIO_FLAG = 1.12` in Parameters (the TEM 2020 99th percentile, matching the SEM LNE gap). The section "Particle shape and outlier check" shows the shape table by SEM lab and TEM session and the flag table. No particle is removed. Tukey fences are no longer used.
+**Decision:** Option B. `ASPECT_RATIO_FLAG = 1.12` in Parameters (the TEM 2020 99th percentile, matching the SEM LNE gap). The section "Checks on the result" prints the TEM 2020 99th percentile, the TEM medians by session and the flag table. The full shape table by SEM lab and TEM session is in commit `c45401b` (Appendix A3). No particle is removed. Tukey fences are no longer used.
 
 **Open follow-up:** the SEM median shifts by −1.21 nm when flagged particles are left out. Options to choose from: report it as a sensitivity result only; carry the "without flagged" median as a second SEM reference, like the maximum Feret check in D2; or fold it into the uncertainty budget. Separately open: whether the CEA 2019 TEM session counts as a valid measurement of nPSize10 (affects TEM as the secondary reference, D1).
 
