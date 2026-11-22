@@ -26,7 +26,8 @@ Newest first. Change the link to `archive/NNN-slug.md` when a task moves.
 
 | Number | Task | Status | Due |
 |---|---|---|---|
-| 005 | [First analysis, AFM vs SEM median size with bootstrap CI](005-first-analysis-afm-vs-sem.md) | active | 2026-11-22 |
+| 006 | [Load section of project11.ipynb](006-load-section.md) | active | 2026-11-22 |
+| 005 | [First analysis, AFM vs SEM median size with bootstrap CI](archive/005-first-analysis-afm-vs-sem.md) | done | 2026-11-22 |
 | 004 | [Set up project11.ipynb, load and explore the expert annotations](archive/004-first-afm-analysis.md) | done | 2026-11-22 |
 | 003 | [Topic declaration](archive/003-topic-declaration.md) | done | 2026-11-08 |
 | 002 | [Copy the course environment](archive/002-environment.md) | done | 2026-11-01 |

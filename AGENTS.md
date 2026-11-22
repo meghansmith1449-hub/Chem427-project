@@ -33,3 +33,7 @@ The student replaces the three lines below and adds a line each time they correc
 - Data: The image database of the nPSize reference-material project on Zenodo: 95 AFM height maps of 512 × 512 pixels in nm at 5.87 nm per pixel, 40 SEM images at 1.4 to 1.9 nm per pixel, 11,227 expert-annotated particles, SAXS curves and the validation report with the reference sizes. pollen-metrology.com, nPSize image and annotation records, Zenodo (2021), doi:10.5281/zenodo.5578927, doi:10.5281/zenodo.5578878 and doi:10.5281/zenodo.5577401; Deumer, J., Gollwitzer, C., Zenodo (2022), doi:10.5281/zenodo.5886834; Bartczak, D., Hodoroaba, V.-D., Zenodo (2022), doi:10.5281/zenodo.7016466. Licenses CC0 for the images and annotations, CC BY 4.0 for the SAXS data and the report.
 
 - Measured variable: 11. Nanoparticle size by three techniques
+
+- Be concise: answer in a few sentences with one recommendation; give tables, option lists or more detail only when asked.
+- Show all code in the chat first; write it to the notebook or any file only after the student approves it.
+- All imports go in the "Setup and imports" cell near the top of the notebook, as in the class notebooks; no other cell imports anything.

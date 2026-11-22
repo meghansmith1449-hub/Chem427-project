@@ -1,8 +1,8 @@
 # 005: First analysis, AFM vs SEM median size with bootstrap CI
 
-- **Status:** active
+- **Status:** done
 - **Created:** 2026-11-20
-- **Updated:** 2026-11-20
+- **Updated:** 2026-11-21
 - **Due:** 2026-11-22
 
 ## Goal
@@ -12,3 +12,5 @@ For nPSize10 (silica) and nPSize01 (gold, 30 and 60 nm populations split first),
 ## Progress log
 
 ## Outcome
+
+Superseded on 2026-11-21: the notebook was restarted with one task per section, starting with task 006. The analysis this task described is now section A1–A2 of `project11.ipynb`.
