@@ -150,3 +150,165 @@ Entries are added when the student says to log a decision. Status is **open** un
 **Open follow-up:** the SEM median shifts by −1.21 nm when flagged particles are left out. Options to choose from: report it as a sensitivity result only; carry the "without flagged" median as a second SEM reference, like the maximum Feret check in D2; or fold it into the uncertainty budget. Separately open: whether the CEA 2019 TEM session counts as a valid measurement of nPSize10 (affects TEM as the secondary reference, D1).
 
 **Reasoning:** see `judgment-log.md` (student's own entry).
+
+---
+---
+
+# Restart: new notebook (2026-11-21)
+
+`project11.ipynb` was restarted in question order (old version: `archive/project11-2026-11-21.ipynb`). Entries D1–D4 above belong to the old notebook and are kept only as history. They do not carry over. Every decision for the new notebook is made again below, against the current goals in `plan.md`, starting from N1.
+
+---
+
+## N1. Which SEM size measure is compared with AFM height?
+
+- **Date:** 2026-11-21
+- **Status:** decided 2026-11-21
+- **Context:** AFM size is the particle's height. SEM sees the projected outline, and this fixes which diameter from it is compared with AFM height, for both materials.
+
+**Data facts (SEM, BAM + LNE, median):**
+
+| | Minimum Feret | Area-equivalent diameter | Difference |
+|---|---|---|---|
+| Silica (n = 287) | 47.74 nm | 47.03 nm | −0.71 nm |
+| Gold 30 nm (n = 122) | 30.71 nm | 30.34 nm | −0.37 nm |
+| Gold 60 nm (n = 196) | 61.42 nm | 62.49 nm | +1.07 nm |
+
+- Area-equivalent diameter computed from each particle's outline (shoelace area, in pixels × pixel size); not in the notebook.
+- Every difference is within about one SEM pixel (0.92–1.86 nm/px).
+- The validation report tabulates electron-microscopy sizes as minimum and maximum Feret.
+- The course project description says SEM "measures a projected area".
+
+**Options considered:** minimum Feret (loaded); maximum Feret (loaded, most affected by touching or elongated particles); area-equivalent diameter (needs the outline area added to the loader).
+
+**Decision:** minimum Feret.
+
+**Reasoning:** see `judgment-log.md` (student's own entry).
+
+---
+
+## N2. Which SEM measurements form the SEM reference?
+
+- **Date:** 2026-11-21
+- **Status:** decided 2026-11-21
+- **Context:** Two laboratories, BAM and LNE, annotated SEM particles. This fixes which of them form the SEM value that AFM is compared with, for silica and both gold populations. Decided before the AFM − SEM result of the new notebook is computed.
+
+**Data facts (SEM minimum Feret, median; gold split at 44 nm):**
+
+| | BAM | LNE |
+|---|---|---|
+| Silica | 46.86 nm (n = 96, 6 images) | 47.92 nm (n = 191, 7 images) |
+| Gold 30 nm | none | 30.71 nm (n = 122, 10 images) |
+| Gold 60 nm | 64.26 nm (n = 90, 6 images) | 60.03 nm (n = 106, 10 images) |
+
+- A bootstrap that resamples images within each laboratory keeps the labs' shares fixed, so the gap between labs moves the pooled median but adds little to the CI width. The gap enters the uncertainty only if it is added as its own term in the combined uncertainty (A4), which is a later decision.
+
+**Options considered:**
+- **A. Pool BAM + LNE**, images resampled within each laboratory.
+- **B. LNE only**, the one lab with all three populations.
+- **C. Each lab separately against AFM.**
+
+**Decision:** A. Pool BAM + LNE, resampled within each laboratory. Gold 30 nm is LNE only, because BAM has no particles there.
+
+**Reasoning:** see `judgment-log.md` (student's own entry).
+
+---
+
+## N3. How are the gold 30 nm and 60 nm populations separated?
+
+- **Date:** 2026-11-21
+- **Status:** decided 2026-11-21
+- **Context:** nPSize01 is a mix of about 30 nm and 60 nm gold spheres, and the labs annotated different shares of each (BAM almost only the 60 nm population). A median over the mix reflects those shares, not the technique, so each population is compared on its own. Decided before the AFM − SEM result of the new notebook is computed.
+
+**Data facts (gold, primary size: AFM height, SEM minimum Feret):**
+
+- Both techniques show a near-empty gap between about 40 and 48 nm (Explore figure). From 42 to 48 nm: SEM 0 particles, AFM 8.
+- Moving the cutoff anywhere from 42 to 46 nm changes the group of 6 of 938 particles (620 AFM + 318 SEM).
+- Course precedent: a cutoff is a named constant in Parameters (S02); a threshold is set from a property of the data and its sensitivity shown (S12). No session teaches mixture models.
+
+**Options considered:**
+- **A. A fixed cutoff in the gap**: 44 nm (middle of the observed gap) or 45 nm (midpoint of the nominal sizes, (30 + 60) / 2).
+- **B. A two-Gaussian mixture**, each particle assigned to the more likely population.
+
+**Decision:** A, at 45 nm. `GOLD_SPLIT_NM = 45` nm: below is the 30 nm population, at or above the 60 nm population.
+
+**Sensitivity around 45 nm:** moving the cutoff to 44 nm moves 2 of 938 particles (44.5 and 44.6 nm) into the 60 nm population; moving it to 46 nm moves 1 (45.7 nm) into the 30 nm population.
+
+**Reasoning:** see `judgment-log.md` (student's own entry).
+
+---
+
+## N4. Which techniques are compared with AFM?
+
+- **Date:** 2026-11-21
+- **Status:** decided 2026-11-21, **to confirm with the mentor**
+- **Context:** The annotations hold four techniques: AFM, SEM, TEM and TSEM. This fixes which of them form the electron-microscopy side of the comparison.
+
+**Data facts:**
+
+- The question in `AGENTS.md` and the notebook says "SEM and SAXS"; the course project list says "electron microscopy and small-angle X-ray scattering", which would also cover TEM.
+- TEM comes from one laboratory (CEA). Its silica median minimum Feret by session: 2019 = 57.6 nm, 2020 = 48.3 nm, 2021 = 49.4 nm.
+- BAM's SEM and TSEM image numbers alternate (e.g. `2103076` SEM, `2103077` TSEM), which suggests the same fields recorded with two detectors; not confirmed.
+
+**Options considered:**
+- **A. AFM and SEM only.**
+- **B. Add TEM as a second electron-microscopy reference.**
+- **C. Pool SEM and TEM as "electron microscopy".**
+
+**Decision:** A. `TECHNIQUES = ["AFM", "SEM"]`. Question for the mentor: does "electron microscopy" in the project description require TEM as well?
+
+**Reasoning:** see `judgment-log.md` (student's own entry).
+
+---
+
+## N5. What does each bootstrap resample draw?
+
+- **Date:** 2026-11-21
+- **Status:** decided 2026-11-21
+- **Context:** The median AFM and SEM sizes and their difference get a bootstrap 95% CI (Part A). This fixes the resampling unit for silica and both gold populations.
+
+**Data facts:**
+
+- S14 notes: "Bootstrap over the unit that is independent… Draw whole the unit that errs together." Also: with few groups, "the spread is itself poorly known".
+- Particles in one image share the AFM tip or SEM beam, the calibration and the background.
+- Silica AFM has 42 particles in 10 images; gold AFM 620 in 20; SEM 6 to 16 images per lab and population.
+- Old notebook (silica AFM − SEM, before the restart): 95% CI −4.78 to −2.68 nm by image, −5.03 to −2.47 nm by particle.
+- Course final-project page, Method "for a 5": compare the method with a named alternative on your data, with a number.
+
+**Options considered:**
+- **A. Images.**
+- **B. Particles.**
+- **C. Images as the result, with particles shown beside it as a named alternative.**
+
+**Decision:** C. `BOOTSTRAP_UNIT = "image"`; the particle bootstrap is reported next to it.
+
+**Reasoning:** see `judgment-log.md` (student's own entry).
+
+---
+
+## N6. Are outliers removed?
+
+- **Date:** 2026-11-21
+- **Status:** decided 2026-11-21
+- **Context:** The analysis compares medians of AFM height and SEM minimum Feret per population (silica, gold 30 nm, gold 60 nm, split at 45 nm). This fixes whether extreme particles are removed first.
+
+**Data facts (primary size):**
+
+| Group | Median | Most extreme values |
+|---|---|---|
+| Gold 30 nm AFM (n = 324) | 28.7 nm | low: 11.4, 11.5, 13.0 nm |
+| Gold 60 nm AFM (n = 296) | 58.7 nm | high: 103.2, 105.2 nm (next 77.9 nm) |
+| Gold 30 / 60 nm SEM (n = 122 / 196) | 30.7 / 61.4 nm | 22.1–41.9 / 48.9–82.6 nm |
+| Silica AFM (n = 42) | 43.7 nm | low: 36.3 nm (next 40.1 nm) |
+| Silica SEM (n = 287) | 47.7 nm | high: 57.7, 60.6 nm |
+
+- Dropping the most extreme 1% at each end changes no median at the 0.1 nm level.
+- Heights of 103–105 nm on 60 nm gold are consistent with one particle on top of another; 11–13 nm on 30 nm gold could be fragments.
+
+**Options considered:**
+- **A. Keep all particles**, and show that the medians do not change when the extremes are dropped.
+- **B. Remove by a rule**, e.g. AFM heights above a limit as stacked particles.
+
+**Decision:** A. No particle is removed.
+
+**Reasoning:** see `judgment-log.md` (student's own entry).

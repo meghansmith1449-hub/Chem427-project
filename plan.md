@@ -44,10 +44,15 @@ The notebook follows the question in order. The previous plan is in git history 
 - **Option 1: Part A1–A2. Chosen.** First in question order. Already computed and checked in the archived notebook, so it is quick to rebuild.
 - **Option 2: Part B on silica.** The course's suggested first analysis (project list). It is new work.
 
-## Kept from earlier decisions
+## Style
 
-- SEM reference: BAM + LNE, minimum Feret (D1, D2).
-- Bootstrap unit: images (S14).
-- Gold split: 44 nm.
-- TEM and TSEM: not used (D1 amendment).
 - Figures rather than wide tables; about 25 cells for the final.
+
+## Decided for the new notebook
+
+- N1: SEM size measure is minimum Feret.
+- N2: SEM reference is BAM + LNE pooled, images resampled within each laboratory.
+- N3: gold split by a fixed cutoff, `GOLD_SPLIT_NM = 45` nm (midpoint of the nominal sizes).
+- N4: techniques are AFM and SEM only (to confirm with the mentor).
+- N5: bootstrap unit is images, with the particle bootstrap shown beside it as the named alternative.
+- N6: no outliers removed; the notebook shows the medians are unchanged without the extremes.
