@@ -26,6 +26,7 @@ Newest first. Change the link to `archive/NNN-slug.md` when a task moves.
 
 | Number | Task | Status | Due |
 |---|---|---|---|
+| 008 | [Part A1–A2 of project11.ipynb, AFM − SEM for silica and gold](008-part-a1-a2.md) | active | 2026-11-22 |
 | 007 | [Explore section of project11.ipynb](007-explore-section.md) | active | 2026-11-22 |
 | 006 | [Load section of project11.ipynb](006-load-section.md) | active | 2026-11-22 |
 | 005 | [First analysis, AFM vs SEM median size with bootstrap CI](archive/005-first-analysis-afm-vs-sem.md) | done | 2026-11-22 |

@@ -37,3 +37,4 @@ The student replaces the three lines below and adds a line each time they correc
 - Be concise: answer in a few sentences with one recommendation; give tables, option lists or more detail only when asked.
 - Show all code in the chat first; write it to the notebook or any file only after the student approves it.
 - All imports go in the "Setup and imports" cell near the top of the notebook, as in the class notebooks; no other cell imports anything.
+- SEM size is the minimum Feret, from BAM and LNE pooled (N1, N2). TEM and TSEM are not used (N4).
