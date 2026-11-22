@@ -312,3 +312,133 @@ Entries are added when the student says to log a decision. Status is **open** un
 **Decision:** A. No particle is removed.
 
 **Reasoning:** see `judgment-log.md` (student's own entry).
+
+---
+
+## N7. What is the draft's first analysis, and on which material?
+
+- **Date:** 2026-11-21
+- **Status:** decided 2026-11-21
+- **Context:** The course's project description says: "A first analysis for the draft. Segment the particles in the AFM maps of one material, take each particle's maximum height, and report the median size with a bootstrap confidence interval." `plan.md` (decided earlier on 2026-11-21) had chosen Part A1–A2, the AFM − SEM comparison on expert annotations, as the draft's first analysis, and listed Part B on silica as "the course's suggested first analysis".
+
+**Data facts:**
+
+- `data/VSL.zip` holds 10 silica AFM maps (`vsl_lne_npsize_10_…`) and 20 gold maps (`vsl_lne_npsize_01_…` and `vsl_lgc_npsize1_…`).
+- Expert annotations on those maps: silica 42 particles in 10 maps; gold 620 particles in 20 maps (324 in the 30 nm population, 296 in the 60 nm population).
+- Silica is one population; gold needs the 45 nm split (N3) before a median means anything.
+- Expert silica AFM median: 43.7 nm (Table 1), a value to check a segmentation against.
+
+**Options considered:**
+- **A. Keep A1–A2 as the draft's first analysis.** Already built; does not do what the course's wording describes.
+- **B. Part B on silica.** One population; the material the question centres on; few particles (42 annotated).
+- **C. Part B on gold.** More particles; needs the population split first.
+
+**Decision:** B. Part B (B1–B3) on silica is the draft's first analysis. A1–A2 stays in the notebook as Part A. Whether the course requires or only suggests this analysis is not yet confirmed with the mentor.
+
+**Reasoning:** see `judgment-log.md` (student's own entry).
+
+---
+
+## N8. How are the AFM maps flattened, and what counts as above the noise?
+
+- **Date:** 2026-11-21
+- **Status:** decided 2026-11-21
+- **Context:** Part B segments particles as connected regions above the substrate. This fixes how the substrate is levelled and how far above it a pixel must be to count. Set before the B3 median was computed.
+
+**Data facts (10 silica maps):**
+
+- Raw substrate medians −0.17 to −0.08 nm; maximum heights 43.9 to 52.5 nm.
+- A plane fitted to pixels below 5 nm changes heights by at most 0.09 nm across a map: the maps arrive nearly flat.
+- Substrate noise σ (from the MAD) 0.10 to 0.12 nm.
+- Sensitivity, with everything else fixed (particles kept, median height):
+
+| Setting | Particles | Median |
+|---|---|---|
+| Substrate below 5 nm, threshold 5 σ (chosen) | 39 | 43.72 nm |
+| Substrate below 2 nm | 39 | 43.72 nm |
+| Substrate below 10 nm | 39 | 43.72 nm |
+| Threshold 3 σ | 49 | 43.08 nm |
+| Threshold 8 σ | 39 | 43.72 nm |
+
+- Course precedent: S11 fits a baseline only through anchor regions away from the peaks; S12 measures noise in a stretch with no peaks and tries prominence from 5 times the noise (`NOISE_SIGMAS = 5`).
+
+**Options considered:**
+- **Flattening:** none (maps already near 0 nm); a plane through substrate pixels; a higher-order surface.
+- **Noise:** standard deviation of substrate pixels; the MAD (robust to particle skirts and debris below the substrate cut).
+- **Threshold:** 3 σ, 5 σ, 8 σ.
+
+**Decision:** a plane through pixels below `SUBSTRATE_MAX_NM = 5.0` nm; σ from the MAD; `THRESHOLD_SIGMA = 5`.
+
+**Reasoning:** see `judgment-log.md` (student's own entry).
+
+---
+
+## N9. Which segmented objects count as whole particles?
+
+- **Date:** 2026-11-21
+- **Status:** decided 2026-11-21
+- **Context:** At 5 σ, 531 objects are found in the 10 silica maps, most of them specks of noise or debris. This fixes which are kept as particles. The cutoff was set from the B2 area-against-height figure, after seeing the objects but before computing the B3 median.
+
+**Data facts:**
+
+- Whole particles inside the map: 210 to 291 px, 36 to 47 nm tall. Every other object: under 131 px and under 14 nm. Any area cutoff from 132 to 209 px keeps the same 39 particles.
+- 6 large objects touch the map edge. Keeping them gives 45 particles and a median of 43.90 nm (vs 39 and 43.72 nm).
+- Particles per map, mine / experts: 4/5, 6/6, 8/8, 4/4, 3/5, 3/3, 2/2, 4/4, 2/2, 3/3. The two shortfalls are maps where the experts kept particles at the edge.
+- No object is much larger than 291 px, so no touching pair was found merged into one object.
+- Course precedent: S12 keeps only peak apexes inside `KEEP_MIN`, clear of the run's two edges; S12 sets detection from the narrowest real peak's width, not from the quantity reported.
+
+**Options considered:**
+- **Size filter:** a minimum area (independent of the height being measured); a minimum height (separates the groups equally well here, but selects on the measured quantity).
+- **Edge:** drop objects touching the map edge (a particle there may be cut off); keep them (matches the experts' counts in two maps).
+
+**Decision:** keep objects of at least `MIN_PARTICLE_AREA_PX = 170` px that do not touch the map edge.
+
+**Reasoning:** see `judgment-log.md` (student's own entry).
+
+---
+
+## N10. What is a segmented particle's size?
+
+- **Date:** 2026-11-21
+- **Status:** decided 2026-11-21
+- **Context:** The AFM height of a rigid sphere on a flat substrate is its diameter (course project description). This fixes how one height is read from each segmented particle.
+
+**Data facts (39 silica particles, median):**
+
+| Height read as | Median |
+|---|---|
+| Tallest pixel (chosen) | 43.72 nm |
+| Mean of the 5 tallest pixels | 43.57 nm |
+| Mean of the 9 tallest pixels | 43.44 nm |
+
+- The tallest pixel carries about +1 σ of noise (σ ≈ 0.1 nm). Averaging more pixels pulls in points down the particle's curved top.
+- 22 of the 39 heights lie within 0.05 nm of an expert height in the same maps; the expert heights come in steps of about 0.08 nm.
+- The course project description says "take each particle's maximum height".
+
+**Options considered:** the tallest pixel; the mean of the top few pixels; a fitted cap.
+
+**Decision:** the tallest pixel above the flattened substrate.
+
+**Reasoning:** see `judgment-log.md` (student's own entry).
+
+---
+
+## N11. Which SAXS curve is fitted: raw or background-subtracted?
+
+- **Date opened:** 2026-11-21
+- **Status:** **open**, for the final submission (A3)
+- **Context:** `data/` holds 17 SAXS `.dat` files. For nPSize1 (gold) and nPSize10 (silica) there is a raw curve and a `_wo_background` curve. This fixes which is fitted. The comparison cells are set aside in `archive/saxs-background-check.ipynb`.
+
+**Data facts:**
+
+- Both versions share the same q grid (0.031 to 1.160 nm⁻¹, 737 points).
+- Raw − subtracted is the same curve for gold and silica: about 184 cm⁻¹ at the lowest q, levelling near 5.2 cm⁻¹, falling to 3.6 cm⁻¹ at the highest q. It is a measured background, not a constant.
+- At q ≈ 0.95 nm⁻¹ the background is 95% (gold) and 85% (silica) of the raw signal.
+- `data/` has no blank or solvent measurement to subtract independently.
+- All four files carry the same `HDF: fcm_2020kw28_00032` header line although their intensities differ.
+
+**Options considered:** fit the raw curve with a background term; fit the `_wo_background` curve as provided. Separately: the upper q limit of the fit.
+
+**Decision:** open.
+
+**Reasoning:** see `judgment-log.md` (student's own entry).
