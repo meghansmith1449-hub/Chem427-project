@@ -105,3 +105,44 @@ Entries are added when the student says to log a decision. Status is **open** un
 **Decision:** Option 1. The loader keeps `centroid_x_nm` and `centroid_y_nm` (unit checked as nm). Check (5) in "Problems found on loading" reports both counts. No rows are removed.
 
 **Reasoning:** see `judgment-log.md` (student's own entry).
+
+---
+
+## D4. How are outliers screened for silica, and is anything removed?
+
+- **Date opened:** 2026-11-21
+- **Status:** decided 2026-11-21 (flag and removal rule). The follow-up on the size of the SEM shift is **open**.
+- **Context:** The draft milestone asks for outliers to be reported with a count and what was done. The first version (commit `2771b2c`) used Tukey fences on size (1.5 × IQR per material × technique group) and removed nothing. This decision replaces that screen for silica (nPSize10). Gold is screened after its 30/60 nm population split (task 005).
+
+**Data facts:**
+
+- *Tukey fences, first version:* silica TEM 41 of 353 flagged (40 above 59.3 nm), SEM 11 of 287, AFM 1 of 42 (36.3 nm; next lowest 40.1 nm), TSEM 1 of 76. The pooled gold fences run from about −16 to 103 nm and flag 2 of 620 AFM heights.
+- *Fences vs pixel steps:* the silica SEM IQR is 2.7 nm, so the fences sit about 2 LNE pixels (1.86 nm/px) beyond the quartiles.
+- *Silica TEM tail is a session effect:* 68 of the 69 particles with minimum Feret > 55 nm are in the 10 CEA images from 2019. Median minimum Feret: 2019 = 57.6 nm, 2020 = 48.3 nm, 2021 = 49.4 nm. Median aspect ratio: 2019 = 1.12, 2020 = 1.03, 2021 = 1.03. The CEA images are not in `data/`.
+- *Shape (aspect ratio = maximum Feret / minimum Feret):*
+
+| Subset | Pixel size (nm/px) | n | p50 | p90 | p99 |
+|---|---|---|---|---|---|
+| SEM BAM | 0.92 | 96 | 1.06 | 1.27 | 1.41 |
+| SEM LNE | 1.86 | 191 | 1.04 | 1.31 | 1.54 |
+| TEM 2019 | 0.26 | 99 | 1.12 | 1.28 | 1.50 |
+| TEM 2020 | 0.26 | 125 | 1.03 | 1.06 | 1.12 |
+| TEM 2021 | 0.40 | 129 | 1.03 | 1.12 | 1.31 |
+
+- *Pixel difference (maximum − minimum Feret, in pixels):* SEM LNE has 145 of 191 particles at 0–2 px, 2 each at 3 and 4 px, then a second group from 5 px. That gap is ≈ 5.6 nm, ≈ 1.12 for a 48 nm particle. SEM BAM declines smoothly with no gap.
+- *Effect of the chosen flag (aspect ratio > 1.12):* SEM 72 of 287 flagged; the median falls from 47.74 to 46.52 nm (−1.21 nm). TEM 64 of 353 flagged; the median falls from 49.64 to 49.14 nm (−0.50 nm). Flagged SEM particles are larger: BAM median 48.7 nm flagged vs 46.8 nm unflagged; LNE 50.2 vs 46.5 nm.
+- *For scale:* the silica AFM − SEM median difference is −4.0 nm, with a bootstrap 95% CI width of 2.2–2.5 nm (cell "Bootstrap unit").
+
+**Options considered:**
+
+- **A. Keep Tukey fences as a screen, nothing removed.** Meets the milestone as is. Assumes one population per group, cannot see the session-level TEM tail, and is sensitive to pixel steps.
+- **B. A physical shape flag (aspect ratio), nothing removed, median shift reported.** Targets elongated or fused particles directly. Adds a cutoff that must be set from shape data only. Does not apply to AFM (tip-dilated lateral shape).
+- **C. A shape flag with removal.** Changes the reference median.
+- **D. A pixel-unit flag ((maximum − minimum Feret) / pixel size).** Scales with resolution. A gap exists for LNE only, and the pixel unit has no meaning for TEM (0.26 nm/px).
+- **E. No screen, statement in markdown only.** The milestone wants a count from code.
+
+**Decision:** Option B. `ASPECT_RATIO_FLAG = 1.12` in Parameters (the TEM 2020 99th percentile, matching the SEM LNE gap). The section "Particle shape and outlier check" shows the shape table by SEM lab and TEM session and the flag table. No particle is removed. Tukey fences are no longer used.
+
+**Open follow-up:** the SEM median shifts by −1.21 nm when flagged particles are left out. Options to choose from: report it as a sensitivity result only; carry the "without flagged" median as a second SEM reference, like the maximum Feret check in D2; or fold it into the uncertainty budget. Separately open: whether the CEA 2019 TEM session counts as a valid measurement of nPSize10 (affects TEM as the secondary reference, D1).
+
+**Reasoning:** see `judgment-log.md` (student's own entry).
