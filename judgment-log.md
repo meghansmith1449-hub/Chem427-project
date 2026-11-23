@@ -1,4 +1,4 @@
-# Judgment log: <your name>
+# Judgment log: <Meghan Smith>
 
 ## How I used AI in this project
 
