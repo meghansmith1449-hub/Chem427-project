@@ -1,8 +1,8 @@
 # 009: Part B of project11.ipynb, segment the silica AFM maps
 
-- **Status:** active
+- **Status:** done
 - **Created:** 2026-11-21
-- **Updated:** 2026-11-21
+- **Updated:** 2026-11-22
 - **Due:** 2026-11-22
 
 ## Goal
@@ -21,4 +21,12 @@ Found that the course's first analysis for the draft is segmentation of one mate
 
 To do: B2 and B3 captions, Next steps.
 
+### 2026-11-22
+
+- Added the property of the data that chose the method to the B2 cell: σ = 0.10 to 0.12 nm against particle heights of about 44 nm, roughly 400 σ.
+- Wrote the Figure 3 caption (39 particles kept, separated from noise and debris by the area cut) and the Figure 4 caption (median 43.72 nm, 95% CI 43.19 to 44.45 nm, n = 39, against the experts' 43.72 nm, 43.14 to 44.31 nm, n = 42).
+- Wrote Next steps: these data cannot say why AFM reads silica smaller, and the assumption checked next is that the experts' `afm_height` is the same measure as my maximum height above the substrate plane, checked by matching particles by centroid (task 010).
+
 ## Outcome
+
+Done. My segmentation of the 10 silica AFM maps keeps 39 particles with a median height of 43.72 nm (95% CI 43.19 to 44.45 nm), the same median as the experts' 42 particles; the 3-particle difference is in two maps where the experts kept particles at the map edge. The check of what the experts' height measures continues in task 010.

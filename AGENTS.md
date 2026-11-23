@@ -38,3 +38,4 @@ The student replaces the three lines below and adds a line each time they correc
 - Show all code in the chat first; write it to the notebook or any file only after the student approves it.
 - All imports go in the "Setup and imports" cell near the top of the notebook, as in the class notebooks; no other cell imports anything.
 - SEM size is the minimum Feret, from BAM and LNE pooled (N1, N2). TEM and TSEM are not used (N4).
+- Segmentation settings stay as set in Parameters (`SUBSTRATE_MAX_NM`, `THRESHOLD_SIGMA`, `MIN_PARTICLE_AREA_PX`): particles are never selected by height, and particles touching the map edge are dropped (N8, N9).

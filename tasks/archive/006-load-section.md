@@ -1,8 +1,8 @@
 # 006: Load section of project11.ipynb
 
-- **Status:** active
+- **Status:** done
 - **Created:** 2026-11-21
-- **Updated:** 2026-11-21
+- **Updated:** 2026-11-22
 - **Due:** 2026-11-22
 
 ## Goal
@@ -24,4 +24,10 @@ Loading checks on the 1,267 particles in scope:
 
 Each problem and what was done is listed in the notebook. Outliers are left for the Explore section, after the histograms.
 
+### 2026-11-21 (later)
+
+Added item 6 (outliers kept, N6, checked after the histograms) and item 7 (not used: 2,318 TEM and 826 TSEM particles, N4, and 6,816 AFM and SEM particles of other nPSize materials) to the Problems list.
+
 ## Outcome
+
+Done. The Load section reads `data/annotations.zip` into a table of 11,227 particles × 10 columns, units checked as nm, and keeps the 1,267 in scope (gold and silica, AFM and SEM). The Problems list has seven numbered items, each with its printed count and what was done; nothing is removed.
